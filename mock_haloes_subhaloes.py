@@ -77,35 +77,9 @@ for i in range(len(M_all)):
 full_sh_id_mass = np.concatenate(full_sh_id_mass) 
 
 first_sh = np.unique(full_sh_id_mass[:,0],return_index=True)[1]
-    #[FirstSub_all[i]]
-    
-#sh_table = np.zeros(len(IDs_all),dtype=object)
-#sh_table_mass = np.zeros(len(IDs_all),dtype=object)
+
 inter_sh_IDs = np.intersect1d(sh_GrNr_all,IDs_all,return_indices=True)
 
-#for i,id_i in enumerate(inter_sh_IDs[2]):
-#    hi_grid = np.zeros((Nsub_all[id_i]-1,3))
-#    hi_mass_grid = np.zeros((Nsub_all[id_i]-1,1))
-#    sh_in_grid = sh_pos_all[inter_sh_IDs[1][i]:inter_sh_IDs[1][i]+Nsub_all[id_i]]
-#    sh_mass_in_grid = sh_mass_all[inter_sh_IDs[1][i]:inter_sh_IDs[1][i]+Nsub_all[id_i]]
-#    hi_grid = sh_in_grid[1:]
-#    hi_mass_grid = sh_mass_in_grid[1:]
-#    sh_table[id_i] = hi_grid
-#    sh_table_mass[id_i] = hi_mass_grid
-#print('Done.')
-
-#full_sh_id_mass = []
-#for i,id_i in enumerate(inter_sh_IDs[2]):
-#    hi_grid = np.zeros((Nsub_all[id_i]-1,3))
-#    hi_mass_grid = np.zeros((Nsub_all[id_i]-1,1))
-#    sh_in_grid = sh_pos_all[inter_sh_IDs[1][i]:inter_sh_IDs[1][i]+Nsub_all[id_i]]
-#    sh_mass_in_grid = sh_mass_all[inter_sh_IDs[1][i]:inter_sh_IDs[1][i]+Nsub_all[id_i]]
-#    hi_grid = sh_in_grid[1:]
-#    hi_mass_grid = sh_mass_in_grid[1:]
-#    sh_group = np.vstack([np.full(len(hi_grid),inter_sh_IDs[0][i]),hi_grid.T,hi_mass_grid]).T
-#    full_sh_id_mass.append(sh_group)
-#full_sh_id_mass = np.concatenate(full_sh_id_mass)
- 
 dir_out = '/cosma7/data/dp004/dc-armi2/HOD_mocks/halo_catalogues/'
 cat_mainhaloes = Table(data = [IDs_all,M_all,R_all,CM_all,pos_all,Nsub_all,first_sh],names=['ID','M200c','R200c','CM','pos','Nsh','FirstSh'])
 cat_subhaloes = Table(data = [full_sh_id_mass[:,0],full_sh_id_mass[:,(1,2,3)],full_sh_id_mass[:,4]],names=['ID_MainHalo','pos','M200c'])
@@ -116,7 +90,6 @@ f.create_dataset('SubHaloes', data=cat_subhaloes)
 
 f.close()
 
-#p.save(dir_out+'Haloes_MG-Gadget_'+Mod+'_z'+str(z_s)+'_L'+str(Lbox)+'_ID_M200c_R200c_pos_Nsh_SubHaloList_SubHaloMass_logMmin_11.2.0.npy',cat_numpy,allow_pickle=True)
 print('saving data in: {}.'.format(dir_out))
 print('End of program')
 

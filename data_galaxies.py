@@ -18,7 +18,8 @@ Z = adata['Z']
 rZ = bdata['Z']
 if iszcut:
     print("indicate min and max redshift for the limited subsample (e.g. CMASS_North 0.45 0.6)")
-    zmin = float(sys.argv[2]); zmax = float(sys.argv[3])
+    zmin = float(sys.argv[2])
+    zmax = float(sys.argv[3])
     adata = adata[(Z>zmin)&(Z<zmax)]
     bdata = bdata[(rZ>zmin)&(rZ<zmax)]
     fname += '_z' + str(zmin) + '_' + str(zmax)
@@ -36,7 +37,6 @@ print("file saved in "+odir+'galaxy_'+fname+".dat \n")
 np.savetxt(odir+'galaxy'+'_'+fname+'.dat',S,fmt=fm,comments='#')
 
 rS = np.vstack([rRA,rDEC,rZ,rw0]).T
-odir = '/cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/'
 print("random saved in "+odir+'random0_'+fname+".dat\n")
 np.savetxt(odir+'random0_'+fname+'.dat',rS,fmt=fm,comments='#')
 print("... done.\n")
@@ -49,3 +49,17 @@ print("... done.\n")
 
 #ngc_sgc = np.vstack([NGC,SGC])
 #np.savetxt('/cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/galaxy_LOWZ_z0.2_0.4.dat',ngc_sgc)
+
+#Resampling
+limit_areas = np.loadtxt('/cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/resampling/R25/limits_subvolumes.txt')
+
+for i in range(len(limit_areas)):
+    patch = limit_areas[i]
+    cond1 = (S[:,0]>patch[0])&((S[:,0]<patch[1]))&(S[:,1]>patch[2])&(S[:,1]<patch[3])
+    cond2 = (rS[:,0]>patch[0])&((rS[:,0]<patch[1]))&(rS[:,1]>patch[2])&(rS[:,1]<patch[3])
+    P = S[~cond1]
+    R = rS[~cond2]
+    np.savetxt('/cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/resampling/R25/JK_galaxy_LOWZ_NGC_field%d.dat'%i,P)
+    np.savetxt('/cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/resampling/R25/JK_random0_LOWZ_NGC_field%d.dat'%i,R)
+    
+    
