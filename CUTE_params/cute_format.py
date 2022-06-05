@@ -63,10 +63,10 @@ pimax = 100
 Npibins = 300
 NJK = 25
 for i in range(NJK):
-    A =    """data_filename= /cosma7/data/dp004/dc-armi2/HOD_mocks/galaxy_catalogues/survey_catalogues/R25/galaxy_LOWZ_North_z0.24_0.36_field_{0}.dat
-random_filename= /cosma7/data/dp004/dc-armi2/HOD_mocks/galaxy_catalogues/survey_catalogues/R25/random0_LOWZ_North_z0.24_0.36_field_{0}.dat
+    A =    """data_filename= /cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/galaxy_CMASS_North_z0.46_0.54.dat
+random_filename= /cosma5/data/dp004/dc-armi2/SDSS/BOSS/DR12/subsamples/random0_CMASS_North_z0.46_0.54.dat
 input_format= 2
-output_filename= /cosma7/data/dp004/dc-armi2/HOD_mocks/observables/clustering/resampling/JK25_field{0}_LOWZ_North_z0.24_0.36_3D_ps_logdim1_{1}_{2}_{3}dim1bins_dim2_0_{4}_{5}dim2bins.dat
+output_filename= /cosma7/data/dp004/dc-armi2/HOD_mocks/observables/clustering/CUTE_xi3D_CMASS_North_monopole_s_0.5_1000_20sbins.hdf5
 corr_type= 3D_ps
 omega_M= 0.274
 omega_L= 0.726
